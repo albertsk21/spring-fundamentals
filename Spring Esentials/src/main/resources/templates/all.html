@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+</head>
+<body>
+<header th:replace="fragments/header::header"></header>
+<main>
+
+    <div class="car" th:each="c : ${cars}" th:object="${c}" >
+        <div th:replace="fragments/car::cardetails(car = ${c})"></div>
+
+        <div>
+            <a th:href="@{/cars/details/{id}(id = *{id})}">Details</a>
+        </div>
+
+    </div>
+
+</main>
+<footer th:include="fragments/footer::footer"></footer>
+</body>
+</html>

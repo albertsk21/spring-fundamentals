@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    password: Albert.nustiu.2002
+    username: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: "jdbc:mysql://localhost:3306/hero_db?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true"
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        format_sql: true

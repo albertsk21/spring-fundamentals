@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+form{
+    padding-top: 132px;
+    padding-bottom: 232px;
+}
+.row{
+    padding-top: 20px;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"   xmlns:th = "https://www.thymeleaf.org">
+<head th:replace="fragments/head::head" ></head>
+<body>
+
+<header th:replace="fragments/header::header"></header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <main class="jumbotron text-center rounded col-md-12 align-self-center">
+            <div class="justify-content-center">
+                <h1>Add Employee</h1>
+            </div>
+            <form
+                    th:action="@{/employees/add}"
+                    th:method="Post"
+                    th:object="${employeeDTO}"
+                    class="m-md-auto w-50 text-center">
+
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input th:field = "*{firstName}" type="text"   th:errorclass="'is-invalid  text-red'"  class="form-control text-center" id="firstName" aria-describedby="firstName" name="firstName" />
+                    <small th:errors= "*{firstName}" class="invalid-feedback rounded" >Error message</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input th:field = "*{lastName}" th:errorclass = "'is-invalid text-red'" type="text" class="form-control text-center" id="lastName" aria-describedby="lastName" name="lastName"/>
+                    <small th:errors = "*{lastName}" class="invalid-feedback rounded">Error message</small>
+                </div>
+
+                <fieldset  class="form-group">
+                    <legend>Choose Education Level</legend>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="educationLevel"  th:errorclass = "'is-invalid text-red'" th:field="*{educationLevel}" th:value="*{T(bg.softuni.project.linkedout.model.enums.EducationLevel).MASTER}"/>
+                            <span>Master</span>
+                        </label>
+                    </div>
+                    <div class="form-check disabled">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" th:field="*{educationLevel}"  th:value="*{T(bg.softuni.project.linkedout.model.enums.EducationLevel).BACHELOR}" name="educationLevel" />
+                            <span>Bachelor</span>
+                        </label>
+                    </div>
+                    <div class="form-check disabled">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input "  th:field="*{educationLevel}" th:value="*{T(bg.softuni.project.linkedout.model.enums.EducationLevel).SECONDARY}" name="educationLevel"  />
+                            <span>Secondary</span>
+                        </label>
+                    </div>
+                    <small th:errors = "*{educationLevel}" th:errorclass = "'is-invalid text-danger'"   >Error message</small>
+                </fieldset>
+
+                <div class="form-group">
+                    <label for="company"><h5>All available companies</h5></label>
+                    <select th:field = "${employeeDTO.companyName}" multiple="false" class="form-control text-center" id="company" name="company">
+                            <th:block th:select ="" th:each="c :${companies}" th:object="${c}">
+                                <option th:text="*{name}" th:value="*{name}">First Company name</option>
+                            </th:block>
+                    </select>
+                    <small th:errors = "${employeeDTO.companyName}" th:errorclass = "'is-invalid text-danger'">Error message</small>
+				</div>
+
+                <div class="form-group">
+                    <label for="jobTitle">Job Title</label>
+                    <input th:field = "*{jobTitle}" th:errorclass = "'is-invalid text-red'"  type="text" class="form-control text-center" id="jobTitle" aria-describedby="jobTitle" name="jobTitle" />
+                    <small th:errors = "*{jobTitle}"  th:errorclass = "'is-invalid text-red'" class="invalid-feedback ">Error message</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthDate">Birth Date</label>
+                    <input th:field = "*{birthdate}" th:errorclass = "'is-invalid text-red'" type="date" class="form-control text-center" id="birthDate" aria-describedby="birthDate" name="birthDate" />
+                    <small th:errors = "*{birthdate}" th:errorclass = "'is-invalid text-red'" class="invalid-feedback ">Error message</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="salary">Salary</label>
+                    <input th:field = "*{salary}" th:errorclass = "'is-invalid text-red'" type="number" min="0" class="form-control text-center" id="salary"
+					aria-describedby="salary" name="salary"/>
+                    <small th:errors = "*{salary}" th:errorclass = "'is-invalid text-red'" class="invalid-feedback">Error message</small>
+                </div>
+
+                <button type="submit" class="btn btn-secondary">Add Employee</button>
+            </form>
+        </main>
+    </div>
+</div>
+</body>
+<footer id="footer" th:include="fragments/footer::footer"></footer>
+</html>

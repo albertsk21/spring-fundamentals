@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script></head>
+<body>
+
+    <div class="container">
+        <header>
+            <nav th:replace="fragments/navbar::navbar"></nav>
+        </header>
+
+        <main >
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="u : ${users}" th:object="${u}">
+                    <th th:text="*{id}" scope="row">1</th>
+                    <td th:text="*{firstName}">Mark</td>
+                    <td th:text="*{lastName}">Otto</td>
+                    <td th:switch="*{userType}">
+                        <p th:case="${T(bg.softuni.userproject.model.enums.UserTypeEnum).ADMIN}">Admin</p>
+                        <p th:case="${T(bg.softuni.userproject.model.enums.UserTypeEnum).MODERATOR}">Moderator</p>
+                    </td>
+                    <td>
+                        <div class="user" style="display: flex">
+
+                            <form th:action="@{/users/delete/{id}(id =*{id})}" th:method="delete">
+                                <input type="submit" th:value="Delete" class="btn btn-danger">
+                            </form>
+                              <a th:href="@{/users/edit/{id}(id =*{id})}" type="button" class="btn btn-warning">Edit</a>
+                        </div>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+              
+        </main>
+    
+
+    </div>
+
+<footer th:replace ="fragments/footer::footer"></footer>
+</body>
+</html>

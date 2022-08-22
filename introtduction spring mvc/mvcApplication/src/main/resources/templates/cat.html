@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" content="width = device-width, user-scalable = no, maximum-scale= 1.0, minimum-scale= 1.0" >
+    <meta http-equiv="X-UA-Compaitble" content="ie=edge">
+    <title>Cat</title>
+</head>
+<body>
+
+    <h1>Cat name</h1> <div th:text="${cat.getName()}"></div><br/>
+    <h1>Cat age</h1> <div th:text="${cat.getAge()}"></div><br/>
+
+
+    <form th:action="@{/cats}" th:method="DELETE">
+
+        <input type="hidden" name="cat_id" th:value="${cat.id}">
+        <input type="submit" value = "Delete">
+    </form>
+    <a th:href="@{/cats}">List all</a>
+</body>
+</html>

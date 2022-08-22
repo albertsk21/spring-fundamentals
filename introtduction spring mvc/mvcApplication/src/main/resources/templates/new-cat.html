@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8" content="width = device-width, user-scalable = no, maximum-scale= 1.0, minimum-scale= 1.0" >
+    <meta http-equiv="X-UA-Compaitble" content="ie=edge">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{/cats}" th:method="POST">
+   Name: <input name="name" type="text">
+   Age: <input name="age" type="text">
+    <input name="submit" type="submit" value="Submit">
+</form>
+</body>
+</html>

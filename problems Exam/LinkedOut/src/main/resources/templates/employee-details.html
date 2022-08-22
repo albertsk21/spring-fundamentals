@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org">
+<head th:replace="fragments/head::head"></head>
+<body>
+<header th:replace="fragments/header::header"></header>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <main class="jumbotron text-center rounded col-md-12 align-self-center">
+                <div class="justify-content-center">
+                    <h1>Employee Details</h1>
+                </div>
+                <div class="row" th:object="${employee}">
+                    <div class="col-md-6 bg-dark">
+                        <h2>Employee</h2>
+                        <h4>First Name: <span th:text="*{firstName}"></span></h4>
+                        <h4>Last Name: <span th:text="*{lastName}"></span></h4>
+
+                        <h4>Education Level:
+                        <th:block th:switch = "*{educationLevel}" >
+
+                            <span th:case="*{T(bg.softuni.project.linkedout.model.enums.EducationLevel).MASTER}" th:text="Master"></span>
+                            <span th:case="*{T(bg.softuni.project.linkedout.model.enums.EducationLevel).BACHELOR}" th:text="Bachelor"></span>
+                            <span th:case="*{T(bg.softuni.project.linkedout.model.enums.EducationLevel).SECONDARY}" th:text="Secondary"></span>
+
+                        </th:block>
+                        </h4>
+
+                        </span></h4>
+                        <h4>Job title: <span th:text="*{jobTitle}"></span></h4>
+                        <h4>Birthdate: <span th:text="*{#temporals.format(birthdate,'dd-MMM-yyyy')}"></span></h4>
+                        <h4>Salary: <span th:text="*{salary}"></span></h4>
+                        <h4>Company: <span th:text="*{companyName}"></span></h4>
+                        <div class="align-bottom">
+						<a class="btn btn-danger align-bottom"
+                                                     th:href="@{/employees/delete/{id}(id = *{id})}">Delete employee</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 bg-dark"><img src="/pic/employee.png" height="350px"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+</main>
+<footer id="footer" th:include="fragments/footer::footer"></footer>
+</body>
+</html>
